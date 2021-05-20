@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewData["Title"] = "Start Workflow";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<div class="w3-container">
+
+    <p>
+        Workflow is configured for this application.
+        <br />
+        To start the workflow click the following link.
+        <br />
+        This will lead to "StartWorkflowController" api controller which will inturn invoke a workflow.
+        <br />
+        <br />
+        <a target="_blank" href="/startworkflow">Start a workflow</a>
+        <br />
+        <br />
+        Click the above link multiple times to start multiple instances of the workflow simultaneously.
+    </p>
+
+    <p>Click the following button to get the details of workflow instances.</p>
+
+    <button class="btn btn-primary" onclick="GetAndSetWorkflowDetails()">Get workflow details</button>
+
+    <br />
+    <br />
+    <span>
+        <label>No of workflow instances: </label>
+        <label class="label label-default" id="workflowCountLabel"></label>
+    </span>
+
+    <table class="table table-bordered" id="workflowDetailsTable">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">id</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //alert("Jquery is working fine dude...");
+            $("#workflowCorrelationsTable").hide();
+            $("#workflowCorrelationsTableFootNotes").hide();
+            $("#workflowCountLabel").text(0);
+            $("#workflowDetailsTable").hide();
+            workflowArray = []; // id, name, status, correlationId
+        });
+
+        function GetAndSetWorkflowDetails() {
+
+            var getWorkflowDetailsUrl = "/api/WorkflowDetails/GetWorkflowInstanceCount"
+            $.ajax({
+                type: "GET",
+                url: getWorkflowDetailsUrl,
+                dataType: "json",
+                success: function (msg) {
+                    $("#workflowCountLabel").text(msg);
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+
+            var getWorkflowDetailsUrl = "/api/WorkflowDetails/GetWorkflowDetails"
+            $.ajax({
+                type: "GET",
+                url: getWorkflowDetailsUrl,
+                dataType: "json",
+                success: function (msg) {
+
+                    $("#workflowDetailsTable").hide();
+
+                    if (msg.wfInstances !== null) {
+                        $("#workflowDetailsTable").show();
+
+                        $("#workflowDetailsTable").find('tbody').empty();
+                        msg.wfInstances.forEach(function (item, index, array) {
+                            $("#workflowDetailsTable").find('tbody')
+                                .append($('<tr>')
+                                    .append($('<td>')
+                                        .text(index)
+                                    )
+                                    .append($('<td>')
+                                        .text(item.id)
+                                    )
+                                    .append($('<td>')
+                                        .text(item.status)
+                                    )
+                                );
+                        });
+                    }
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        }
+
+    </script>
+}
