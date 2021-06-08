@@ -44,3 +44,13 @@ namespace P20240PersistenceEfMsSql
         }
     }
 }
+
+/*
+ 
+use [Elsa20]
+SELECT * FROM [Elsa].[Bookmarks]
+SELECT * FROM [Elsa].[WorkflowDefinitions]
+SELECT * FROM [Elsa].[WorkflowExecutionLogRecords]
+SELECT * FROM [Elsa].[WorkflowInstances]
+
+ */
