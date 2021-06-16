@@ -43,6 +43,7 @@ namespace P20703DashboardWithServer
         {
             if (Environment.IsDevelopment())
                 app.UseDeveloperExceptionPage();
+
             app
                 .UseStaticFiles() // For Dashboard.
                 .UseHttpActivities()
@@ -54,8 +55,9 @@ namespace P20703DashboardWithServer
                         name: "default",
                         pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                    endpoints.MapFallbackToPage("/_Host");
+                    //endpoints.MapFallbackToPage("/_Host");
                     //endpoints.MapFallbackToPage("/ElsaWorkflows/{**segment}", "/_Host");
+                    endpoints.MapRazorPages();
                 });
 
         }
