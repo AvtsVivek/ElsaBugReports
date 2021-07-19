@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Elsa" Version="2.1.0.443" />
+        <PackageReference Include="Elsa.Activities.Temporal.Quartz" Version="2.1.0.443" />
+        <PackageReference Include="Elsa.Activities.Http" Version="2.1.0.443" />
+        <PackageReference Include="Elsa.Designer.Components.Web" Version="2.1.0.443" />
+        <PackageReference Include="Elsa.Activities.Email" Version="2.1.0.443" />
+        <PackageReference Include="Elsa.Activities.UserTask" Version="2.1.0.443" />
+        <PackageReference Include="Elsa.Persistence.EntityFramework.SqlServer" Version="2.1.0.443" />
+        <PackageReference Include="Elsa.Server.Api" Version="2.1.0.443" />
+
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+
+    </ItemGroup>
+</Project>
