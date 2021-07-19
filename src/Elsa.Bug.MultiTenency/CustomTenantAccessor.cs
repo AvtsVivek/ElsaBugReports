@@ -24,6 +24,7 @@ namespace Elsa.Bug.MultiTenency
             // But if you insert any other string, a simple empty string for that matter, 
             // we get 404 not found for some endpoints.
 
+            // Uncommenting the following two lines will result in inserting null as tenant id.
             // if (string.IsNullOrWhiteSpace(tenantId))
             //    return Task.FromResult<string?>(null);
 
